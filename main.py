@@ -1,4 +1,5 @@
 from random import randint, choice
+import pickle
 
 No = 1
 languages = ["Python", "C++", "C#", "Java"]
@@ -35,9 +36,15 @@ with open("data.csv", "r") as datafile:
                 sorted_students[text[3]][text[5]] = []
             sorted_students[text[3]][text[5]].append(text)
     sorted_students = dict(sorted(sorted_students.items(), key = lambda item: int(item[0])))
+uploaded_data = ""
 for key in sorted_students:
     print(f"{key} :")
+    uploaded_data += key + " :\n"
     for key1 in sorted_students[key]:
         print(f"    {key1} :")
+        uploaded_data += "    " + key1 + " :\n"
         for student in sorted_students[key][key1]:
             print(f"        {student}")
+            uploaded_data += "        " + str(student) + "\n"
+with open("binary.bzn", "wb") as binary_data:
+    pickle.dump(uploaded_data, binary_data)
